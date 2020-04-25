@@ -70,9 +70,7 @@ The zoos want to display both the scientific name and the animal name in front o
 */
 const displayNames = [];
 zooAnimals.forEach(function (item) {
-  if (item === item.animal_name || item.scientific_name) {
-    displayNames.push(item);
-  }
+  displayNames.push(item);
 });
 console.log(displayNames);
 
@@ -80,8 +78,8 @@ console.log(displayNames);
 The zoos need a list of all their animal's names (animal_name only) converted to lower case. Using map, create a new array of strings named lowCaseAnimalNames, each string following this pattern: "jackal, asiatic". Log the resut.
 */
 
-const lowCaseAnimalNames = zooAnimals.map((uppercase) => {
-  return uppercase.animal_name.toLowerCase();
+const lowCaseAnimalNames = zooAnimals.map((lowercase) => {
+  return lowercase.animal_name.toLowerCase();
 });
 
 console.log(lowCaseAnimalNames);
@@ -97,24 +95,29 @@ console.log(lowPopulationAnimals);
 /* Request 4: .reduce() 
 The zoos need to know their total animal population across the United States. Find the total population from all the zoos using the .reduce() method. Remember the reduce method takes two arguments: a callback (which itself takes two args), and an initial value for the count.
 */
-const populationTotal = 0;
-console.log(populationTotal);
+// map here
+const pop = zooAnimals.map((population) => {
+  return population.population;
+});
 
-// ==== Callbacks ====
+let totalPop = pop.reduce(function (accumulator, population) {
+  return accumulator + population;
+});
+console.log(totalPop);
 
-/* Step 1: Create a higher-order function
- * Create a higher-order function named consume with 3 parameters: a, b and cb
- * The first two parameters can take any argument (we can pass any value as argument)
- * The last parameter accepts a callback
- * The consume function should return the invocation of cb, passing a and b into cb as arguments
- */
+// // ==== Callbacks ====s/* Step 1: Create a higher-order function
+//  * Create a higher-order function named consume with 3 parameters: a, b and cb
+//  * The first two parameters can take any argument (we can pass any value as argument)
+//  * The last parameter accepts a callback
+//  * The consume function should return the invocation of cb, passing a and b into cb as arguments
+//  */
 function cb(a, b) {
   return a + b;
 }
 function consume(a, b, cb) {
   return cb(a, b);
 }
-console.log(consume(a, b, cb(a, b)));
+console.log(consume(2, 3, cb));
 /* Step 2: Create several functions to callback with consume();
  * Create a function named add that returns the sum of two numbers
  * Create a function named multiply that returns the product of two numbers
